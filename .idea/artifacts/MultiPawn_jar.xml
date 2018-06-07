@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="MultiPawn:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/MultiPawn_jar</output-path>
+    <root id="archive" name="MultiPawn.jar">
+      <element id="module-output" name="MultiPawn" />
+      <element id="extracted-dir" path="$USER_HOME$/Desktop/Коля/Библиотеки для java/commons-io-2.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Desktop/Коля/Библиотеки для java/ini4j-0.5.4.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
