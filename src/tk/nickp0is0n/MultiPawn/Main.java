@@ -13,14 +13,17 @@ public class Main {
     private static Scanner in = new Scanner(System.in);
     private static Scanner inStr = new Scanner(System.in);
 
+    private static int count = 0;
+
     public static void main(String[] args) throws IOException {
         System.out.println("MultiPawn v1.0");
         System.out.println("by NickP0is0n (nickp0is0n.tk)");
         Wini ini = null;
-        ini = getWini(ini);
+        int count = 0;
         while (true)
         {
-            int count = ini.get("Base Config", "Count", int.class);
+            ini = getWini(ini);
+            count = ini.get("Base Config", "Count", int.class);
             System.out.println(" ");
             System.out.println("Выберите профиль, на который хотите переключится:");
             for (int i = 1; i <= count; i++)
