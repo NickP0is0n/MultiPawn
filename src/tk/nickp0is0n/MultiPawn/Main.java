@@ -52,6 +52,13 @@ public class Main {
             }
             else if (choose == (count + 2))
             {
+                if (!DeleteProfile())
+                {
+                    System.out.println("Ошибка при удалении профиля!");
+                    System.out.println("Для выхода из программы нажмите любую клавишу.");
+                    System.in.read();
+                    System.exit(4);
+                }
             }
             else
             {
@@ -65,6 +72,13 @@ public class Main {
                 }
             }
         }
+    }
+
+    private static boolean DeleteProfile() {
+        System.out.println("\nВведите номер профиля, который вы хотите удалить:");
+        int number = in.nextInt();
+        System.out.println("В разработке");
+        return true;
     }
 
     private static boolean loadProfile(String name) throws IOException // возвращает false (ошибка) либо true (успех)
