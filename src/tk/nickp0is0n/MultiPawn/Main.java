@@ -16,7 +16,7 @@ public class Main {
     private static int count = 0;
 
     public static void main(String[] args) throws IOException {
-        System.out.println("MultiPawn v1.0");
+        System.out.println("MultiPawn Alpha v1.1.0.0906.1");
         System.out.println("by NickP0is0n (nickp0is0n.tk)");
         Wini ini = null;
         int count = 0;
@@ -32,7 +32,8 @@ public class Main {
                 System.out.println("(" + i + ") " + section);
             }
             System.out.println("(" + (count + 1) + ") Добавить новый профиль");
-            System.out.println("(" + (count + 2) + ") Выйти");
+            System.out.println("(" + (count + 2) + ") Удалить профиль");
+            System.out.println("(" + (count + 3) + ") Выйти");
             int choose = in.nextInt();
             if (choose == (count + 1))
             {
@@ -45,9 +46,12 @@ public class Main {
                 }
 
             }
-            else if (choose == (count + 2))
+            else if (choose == (count + 3))
             {
                 System.exit(-1);
+            }
+            else if (choose == (count + 2))
+            {
             }
             else
             {
