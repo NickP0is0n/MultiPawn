@@ -106,7 +106,7 @@ public class Main {
 
     private static boolean newProfile(int count) throws IOException // возвращает false (ошибка) либо true (успех)
     {
-        System.out.println("Введите название нового профиля:");
+        System.out.println("\nВведите название нового профиля:");
         File name = new File(inStr.nextLine());
         try {
             Files.createDirectory(name.toPath());
