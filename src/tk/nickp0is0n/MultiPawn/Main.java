@@ -16,13 +16,13 @@ public class Main {
     private static int count = 0;
 
     public static void main(String[] args) throws IOException {
-        System.out.println("MultiPawn Alpha v1.1.0.0906.1");
+        System.out.println("MultiPawn Alpha v2.0.0.2206.1");
         System.out.println("by NickP0is0n (nickp0is0n.tk)");
         Wini ini = null;
         int count = 0;
         while (true)
         {
-            ini = getWini(ini);
+            ini = PawnProfile.getWini();
             count = ini.get("Base Config", "Count", int.class);
             System.out.println(" ");
             System.out.println("Выберите профиль, на который хотите переключится:");
@@ -52,95 +52,34 @@ public class Main {
             }
             else if (choose == (count + 2))
             {
-                if (!DeleteProfile())
-                {
-                    System.out.println("Ошибка при удалении профиля!");
-                    System.out.println("Для выхода из программы нажмите любую клавишу.");
-                    System.in.read();
-                    System.exit(4);
-                }
+                DeleteProfile();
             }
             else
             {
-                String name = ini.get(String.valueOf(choose), "Name", String.class);
-                if (!loadProfile(name))
-                {
-                    System.out.println("Ошибка при загрузке профиля!");
-                    System.out.println("Для выхода из программы нажмите любую клавишу.");
-                    System.in.read();
-                    System.exit(4);
-                }
+                PawnProfile newProfile = new PawnProfile(choose);
+                newProfile.getNameByNumber();
+                newProfile.load();
+                System.out.println("Профиль " + newProfile.getName() + " успешно загружен!");
+                System.out.println("Нажмите любую клавишу для продолжения...");
+                System.in.read();
             }
         }
     }
 
-    private static boolean DeleteProfile() {
+    private static void DeleteProfile() {
         System.out.println("\nВведите номер профиля, который вы хотите удалить:");
         int number = in.nextInt();
         System.out.println("В разработке");
-        return true;
-    }
-
-    private static boolean loadProfile(String name) throws IOException // возвращает false (ошибка) либо true (успех)
-    {
-        try {
-            FileUtils.deleteDirectory(new File("include"));
-        } catch (IOException e) {
-            return false;
-        }
-        try {
-            Files.createDirectory(new File("include").toPath());
-        } catch (IOException e) {
-            return false;
-        }
-        try {
-            FileUtils.copyDirectory(new File(name), new File("include"));
-        } catch (IOException e) {
-            return false;
-        }
-        System.out.println("Профиль " + name + " успешно загружен!");
-        System.out.println("Нажмите любую клавишу для продолжения...");
-        System.in.read();
-        return true;
     }
 
     private static boolean newProfile(int count) throws IOException // возвращает false (ошибка) либо true (успех)
     {
         System.out.println("\nВведите название нового профиля:");
-        File name = new File(inStr.nextLine());
-        try {
-            Files.createDirectory(name.toPath());
-        } catch (IOException e) {
-            return false;
-        }
-        Wini ini = null;
-        try {
-            ini = getWini(ini);
-        } catch (IOException e) {
-            return false;
-        }
-        ini.put(String.valueOf(count + 1),"Name", name.toString());
-        ini.put("Base Config", "Count", count + 1);
-        try {
-            ini.store();
-        } catch (IOException e) {
-            return false;
-        }
+        PawnProfile newProfile = new PawnProfile(inStr.nextLine(), count+1);
+        newProfile.create();
         System.out.println("Профиль успешно создан!");
         System.out.println("Теперь поместите в созданную папку все include");
         System.in.read();
         return true;
-    }
-
-    private static Wini getWini(Wini ini) throws IOException {
-        try {
-            ini = new Wini(new File("mpconfig.ini"));
-        } catch (IOException e) {
-            System.out.println("Ошибка в файле конфигурации!");
-            System.out.println("Для выхода из программы нажмите любую клавишу.");
-            System.in.read();
-            System.exit(4);
-        }
-        return ini;
     }
 }
