@@ -16,7 +16,7 @@ public class Main {
     private static int count = 0;
 
     public static void main(String[] args) throws IOException {
-        System.out.println("MultiPawn Alpha v2.0.0.2206.1");
+        System.out.println("MultiPawn Alpha v2.0.0.2306.2");
         System.out.println("by NickP0is0n (nickp0is0n.tk)");
         Wini ini = null;
         int count = 0;
@@ -52,7 +52,10 @@ public class Main {
             }
             else if (choose == (count + 2))
             {
-                DeleteProfile();
+                System.out.println("\nВведите номер профиля, который вы хотите удалить:");
+                int number = in.nextInt();
+                var newProfile = new PawnProfile(number);
+                newProfile.delete();
             }
             else
             {
@@ -66,15 +69,14 @@ public class Main {
     }
 
     private static void DeleteProfile() {
-        System.out.println("\nВведите номер профиля, который вы хотите удалить:");
-        int number = in.nextInt();
+
         System.out.println("В разработке");
     }
 
     private static boolean newProfile(int count) throws IOException // возвращает false (ошибка) либо true (успех)
     {
         System.out.println("\nВведите название нового профиля:");
-        PawnProfile newProfile = new PawnProfile(inStr.nextLine(), count+1);
+        var newProfile = new PawnProfile(inStr.nextLine(), count+1);
         newProfile.create();
         System.out.println("Профиль успешно создан!");
         System.out.println("Теперь поместите в созданную папку все include");

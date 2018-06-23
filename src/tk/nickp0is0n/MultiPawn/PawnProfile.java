@@ -1,6 +1,7 @@
 package tk.nickp0is0n.MultiPawn;
 
 import org.apache.commons.io.FileUtils;
+import org.ini4j.Ini;
 import org.ini4j.Wini;
 
 import java.io.File;
@@ -43,9 +44,25 @@ public class PawnProfile {
     }
 
     public void load() throws IOException {
-            FileUtils.deleteDirectory(new File("include"));
-            Files.createDirectory(new File("include").toPath());
-            FileUtils.copyDirectory(new File(name), new File("include"));
+        FileUtils.deleteDirectory(new File("include"));
+        Files.createDirectory(new File("include").toPath());
+        FileUtils.copyDirectory(new File(name), new File("include"));
+    }
+
+    public void delete() throws IOException {
+        //var ini = new Ini(new File("mpconfig.ini"));
+        //var section = ini.get(String.valueOf(number));
+        var ini = getWini();
+        ini.remove(ini.get(String.valueOf(number)));
+        FileUtils.deleteDirectory(new File(name));
+        var totalcount = ini.get("Base Config", "Count", int.class);
+        for (int i = number + 1; i <= totalcount; i++)
+        {
+            var name = ini.get(String.valueOf(i), "Name", String.class);
+            ini.put(String.valueOf(i - 1), "Name", name);
+        }
+        ini.put("Base Config", "Count", totalcount-1);
+        ini.store();
     }
 
     public static Wini getWini() throws IOException {
