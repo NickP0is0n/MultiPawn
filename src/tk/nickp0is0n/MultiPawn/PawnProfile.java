@@ -17,9 +17,10 @@ public class PawnProfile {
         this.number = number;
     }
 
-    public PawnProfile(int number)
-    {
+    public PawnProfile(int number) throws IOException {
         this.number = number;
+        var ini = getWini();
+        name = ini.get(String.valueOf(number), "Name", String.class);
     }
 
     public String getName()
@@ -32,80 +33,23 @@ public class PawnProfile {
         return number;
     }
 
-    public void getNameByNumber() throws IOException {
-        Wini ini = null;
-        ini = getWini();
-        name = ini.get(String.valueOf(number), "Name", String.class);
-    }
-
     public void create() throws IOException {
         var name = new File(this.name);
-        try {
-            Files.createDirectory(name.toPath());
-        } catch (IOException e) {
-            System.out.println("Ошибка при создании нового профиля!");
-            System.out.println("Для выхода из программы нажмите любую клавишу.");
-            System.in.read();
-            System.exit(4);
-        }
-        Wini ini = null;
-        try {
-            ini = PawnProfile.getWini();
-        } catch (IOException e) {
-            System.out.println("Ошибка при создании нового профиля!");
-            System.out.println("Для выхода из программы нажмите любую клавишу.");
-            System.in.read();
-            System.exit(4);
-        }
+        Files.createDirectory(name.toPath());
+        var ini = PawnProfile.getWini();
         ini.put(String.valueOf(number),"Name", name.toString());
         ini.put("Base Config", "Count", number);
-        try {
-            ini.store();
-        } catch (IOException e) {
-            System.out.println("Ошибка при создании нового профиля!");
-            System.out.println("Для выхода из программы нажмите любую клавишу.");
-            System.in.read();
-            System.exit(4);
-        }
+        ini.store();
     }
 
     public void load() throws IOException {
-        try {
             FileUtils.deleteDirectory(new File("include"));
-        } catch (IOException e) {
-            System.out.println("Ошибка при загрузке профиля!");
-            System.out.println("Для выхода из программы нажмите любую клавишу.");
-            System.in.read();
-            System.exit(4);
-        }
-        try {
             Files.createDirectory(new File("include").toPath());
-        } catch (IOException e) {
-            System.out.println("Ошибка при загрузке профиля!");
-            System.out.println("Для выхода из программы нажмите любую клавишу.");
-            System.in.read();
-            System.exit(4);
-        }
-        try {
             FileUtils.copyDirectory(new File(name), new File("include"));
-        } catch (IOException e) {
-            System.out.println("Ошибка при загрузке профиля!");
-            System.out.println("Для выхода из программы нажмите любую клавишу.");
-            System.in.read();
-            System.exit(4);
-        }
     }
 
     public static Wini getWini() throws IOException {
-        try {
-            var ini = new Wini(new File("mpconfig.ini"));
-            return ini;
-        } catch (IOException e) {
-            System.out.println("Ошибка в файле конфигурации!");
-            System.out.println("Для выхода из программы нажмите любую клавишу.");
-            System.in.read();
-            System.exit(4);
-        }
-        return null;
+        var ini = new Wini(new File("mpconfig.ini"));
+        return ini;
     }
 }

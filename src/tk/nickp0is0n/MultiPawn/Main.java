@@ -57,7 +57,6 @@ public class Main {
             else
             {
                 PawnProfile newProfile = new PawnProfile(choose);
-                newProfile.getNameByNumber();
                 newProfile.load();
                 System.out.println("Профиль " + newProfile.getName() + " успешно загружен!");
                 System.out.println("Нажмите любую клавишу для продолжения...");
