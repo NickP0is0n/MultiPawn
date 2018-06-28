@@ -13,8 +13,8 @@ public class Main {
     private static int count = 0;
 
     public static void main(String[] args) throws IOException {
-        System.out.println("MultiPawn 2.0 RC1");
-        System.out.println("by NickP0is0n (nickp0is0n.tk)");
+        System.out.println("MultiPawn 2.0");
+        System.out.println("by NickP0is0n (nickp0is0n.me)");
         Wini ini = null;
         int count = 0;
         while (true)
