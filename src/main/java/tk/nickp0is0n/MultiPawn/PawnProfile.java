@@ -50,8 +50,6 @@ public class PawnProfile {
     }
 
     public void delete() throws IOException {
-        //var ini = new Ini(new File("mpconfig.ini"));
-        //var section = ini.get(String.valueOf(number));
         var ini = getWini();
         ini.remove(ini.get(String.valueOf(number)));
         FileUtils.deleteDirectory(new File(name));
