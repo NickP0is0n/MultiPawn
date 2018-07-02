@@ -63,6 +63,15 @@ public class PawnProfile {
         ini.store();
     }
 
+    public void rename(String name) throws IOException {
+        var ini = getWini();
+        ini.put(String.valueOf(number), "Name", name);
+        ini.store();
+        var directory = new File(this.name);
+        directory.renameTo(new File(name));
+        this.name = name;
+    }
+
     public static Wini getWini() throws IOException {
         var ini = new Wini(new File("mpconfig.ini"));
         return ini;
