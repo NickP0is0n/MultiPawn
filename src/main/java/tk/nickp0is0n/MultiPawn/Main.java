@@ -30,7 +30,8 @@ public class Main {
             }
             System.out.println("(" + (count + 1) + ") Добавить новый профиль");
             System.out.println("(" + (count + 2) + ") Удалить профиль");
-            System.out.println("(" + (count + 3) + ") Выйти");
+            System.out.println("(" + (count + 3) + ") Переименовать профиль");
+            System.out.println("(" + (count + 4) + ") Выйти");
             int choose = in.nextInt();
             if (choose == (count + 1))
             {
@@ -53,6 +54,15 @@ public class Main {
                 int number = in.nextInt();
                 var newProfile = new PawnProfile(number);
                 newProfile.delete();
+            }
+            else if (choose == (count + 3))
+            {
+                System.out.println("\nВведите номер профиля, который вы хотите переименовать:");
+                int number = in.nextInt();
+                System.out.println("Введите новое имя профиля:");
+                String newName = inStr.nextLine();
+                var workProfile = new PawnProfile(number);
+                workProfile.rename(newName);
             }
             else
             {
