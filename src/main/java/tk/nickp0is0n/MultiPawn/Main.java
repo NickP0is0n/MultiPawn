@@ -24,6 +24,8 @@ public class Main {
         {
             ini = PawnProfile.getWini();
             count = ini.get("Base Config", "Count", int.class);
+            directoryCustom = ini.get("Base Config", "IsDirCustom", boolean.class);
+            if(isDirectoryCustom()) ini.get("Base Config", "Custom Dir", String.class);
             System.out.println(" ");
             System.out.println("Выберите профиль, на который хотите переключится:");
             for (int i = 1; i <= count; i++)
@@ -86,10 +88,16 @@ public class Main {
                             customDir = inStr.nextLine();
                             directoryCustom = true;
                             System.out.println("Кастомная папка установлена! Не забудьте перенести в неё существующие профили!\n");
+                            ini.put("Base Config", "IsDirCustom", true);
+                            ini.put("Base Config", "Custom Dir", customDir);
+                            ini.store();
                             break;
                         case 2:
                             directoryCustom = false;
                             customDir = "";
+                            ini.put("Base Config", "IsDirCustom", false);
+                            ini.put("Base Config", "Custom Dir", customDir);
+                            ini.store();
                             System.out.println("Папка сброшена.");
                             break;
                         case 3:

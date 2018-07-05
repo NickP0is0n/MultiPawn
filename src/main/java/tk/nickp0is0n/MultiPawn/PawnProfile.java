@@ -14,14 +14,16 @@ public class PawnProfile {
 
     public PawnProfile(String name, int number)
     {
-        this.name = name;
+        if (Main.isDirectoryCustom()) this.name = Main.getCustomDir() + "/" + name;
+        else this.name = name;
         this.number = number;
     }
 
     public PawnProfile(int number) throws IOException {
         this.number = number;
         var ini = getWini();
-        name = ini.get(String.valueOf(number), "Name", String.class);
+        if (Main.isDirectoryCustom()) this.name = Main.getCustomDir() + "/" + ini.get(String.valueOf(number), "Name", String.class);
+        else this.name = ini.get(String.valueOf(number), "Name", String.class);
     }
 
     public String getName()
