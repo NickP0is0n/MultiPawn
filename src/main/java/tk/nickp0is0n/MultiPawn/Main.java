@@ -10,6 +10,9 @@ public class Main {
     private static Scanner in = new Scanner(System.in);
     private static Scanner inStr = new Scanner(System.in);
 
+    private static boolean directoryCustom = false;
+    private static String customDir = "";
+
     private static int count = 0;
 
     public static void main(String[] args) throws IOException {
@@ -31,7 +34,8 @@ public class Main {
             System.out.println("(" + (count + 1) + ") Добавить новый профиль");
             System.out.println("(" + (count + 2) + ") Удалить профиль");
             System.out.println("(" + (count + 3) + ") Переименовать профиль");
-            System.out.println("(" + (count + 4) + ") Выйти");
+            System.out.println("(" + (count + 4) + ") Дополнительные опции");
+            System.out.println("(" + (count + 5) + ") Выйти");
             int choose = in.nextInt();
             if (choose == (count + 1))
             {
@@ -44,9 +48,9 @@ public class Main {
                 }
 
             }
-            else if (choose == (count + 3))
+            else if (choose == (count + 5))
             {
-                System.exit(-1);
+                System.exit(0);
             }
             else if (choose == (count + 2))
             {
@@ -63,6 +67,35 @@ public class Main {
                 String newName = inStr.nextLine();
                 var workProfile = new PawnProfile(number);
                 workProfile.rename(newName);
+            }
+            else if (choose == (count + 4))
+            {
+                mainLabel: while (true)
+                {
+                    System.out.println("(1) Изменить папку для профилей");
+                    System.out.println("(2) Вернуть стандартную папку");
+                    System.out.println("(3) Вернутся в главное меню");
+                    int advChoose = in.nextInt();
+                    switch (advChoose)
+                    {
+                        default:
+                            System.out.println("Неправильный ввод\n");
+                            break;
+                        case 1:
+                            System.out.println("Введите путь к папке, где будут хранится профили:");
+                            customDir = inStr.nextLine();
+                            directoryCustom = true;
+                            System.out.println("Кастомная папка установлена! Не забудьте перенести в неё существующие профили!\n");
+                            break;
+                        case 2:
+                            directoryCustom = false;
+                            customDir = "";
+                            System.out.println("Папка сброшена.");
+                            break;
+                        case 3:
+                            break mainLabel;
+                    }
+                }
             }
             else
             {
@@ -84,5 +117,13 @@ public class Main {
         System.out.println("Теперь поместите в созданную папку все include");
         System.in.read();
         return true;
+    }
+
+    public static boolean isDirectoryCustom() {
+        return directoryCustom;
+    }
+
+    public static String getCustomDir() {
+        return customDir;
     }
 }
