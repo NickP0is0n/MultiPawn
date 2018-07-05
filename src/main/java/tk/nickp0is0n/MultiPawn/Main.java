@@ -16,7 +16,7 @@ public class Main {
     private static int count = 0;
 
     public static void main(String[] args) throws IOException {
-        System.out.println("MultiPawn Alpha v2.1.0.0307.1");
+        System.out.println("MultiPawn Alpha v2.1.0.0507.5");
         System.out.println("by NickP0is0n (nickp0is0n.me)");
         Wini ini = null;
         int count = 0;
@@ -25,7 +25,7 @@ public class Main {
             ini = PawnProfile.getWini();
             count = ini.get("Base Config", "Count", int.class);
             directoryCustom = ini.get("Base Config", "IsDirCustom", boolean.class);
-            if(isDirectoryCustom()) ini.get("Base Config", "Custom Dir", String.class);
+            customDir = ini.get("Base Config", "Custom Dir", String.class);
             System.out.println(" ");
             System.out.println("Выберите профиль, на который хотите переключится:");
             for (int i = 1; i <= count; i++)

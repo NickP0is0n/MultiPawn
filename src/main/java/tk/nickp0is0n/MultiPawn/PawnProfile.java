@@ -14,16 +14,14 @@ public class PawnProfile {
 
     public PawnProfile(String name, int number)
     {
-        if (Main.isDirectoryCustom()) this.name = Main.getCustomDir() + "/" + name;
-        else this.name = name;
+        this.name = name;
         this.number = number;
     }
 
     public PawnProfile(int number) throws IOException {
         this.number = number;
         var ini = getWini();
-        if (Main.isDirectoryCustom()) this.name = Main.getCustomDir() + "/" + ini.get(String.valueOf(number), "Name", String.class);
-        else this.name = ini.get(String.valueOf(number), "Name", String.class);
+        this.name = ini.get(String.valueOf(number), "Name", String.class);
     }
 
     public String getName()
@@ -38,9 +36,10 @@ public class PawnProfile {
 
     public void create() throws IOException {
         var name = new File(this.name);
+        if (Main.isDirectoryCustom()) name = new File(Main.getCustomDir() + "/" + this.name);
         Files.createDirectory(name.toPath());
         var ini = PawnProfile.getWini();
-        ini.put(String.valueOf(number),"Name", name.toString());
+        ini.put(String.valueOf(number),"Name", this.name);
         ini.put("Base Config", "Count", number);
         ini.store();
     }
@@ -48,17 +47,21 @@ public class PawnProfile {
     public void load() throws IOException {
         FileUtils.deleteDirectory(new File("include"));
         Files.createDirectory(new File("include").toPath());
+        String name = this.name;
+        if (Main.isDirectoryCustom()) name = Main.getCustomDir() + "/" + this.name;
         FileUtils.copyDirectory(new File(name), new File("include"));
     }
 
     public void delete() throws IOException {
         var ini = getWini();
         ini.remove(ini.get(String.valueOf(number)));
+        String name = this.name;
+        if (Main.isDirectoryCustom()) name = Main.getCustomDir() + "/" + this.name;
         FileUtils.deleteDirectory(new File(name));
         var totalcount = ini.get("Base Config", "Count", int.class);
         for (int i = number + 1; i <= totalcount; i++)
         {
-            var name = ini.get(String.valueOf(i), "Name", String.class);
+            name = ini.get(String.valueOf(i), "Name", String.class);
             ini.put(String.valueOf(i - 1), "Name", name);
         }
         ini.put("Base Config", "Count", totalcount-1);
@@ -69,8 +72,11 @@ public class PawnProfile {
         var ini = getWini();
         ini.put(String.valueOf(number), "Name", name);
         ini.store();
-        var directory = new File(this.name);
-        directory.renameTo(new File(name));
+        String name1 = this.name;
+        if (Main.isDirectoryCustom()) name1 = Main.getCustomDir() + "/" + this.name;
+        var directory = new File(name1);
+        if (Main.isDirectoryCustom()) directory.renameTo(new File(Main.getCustomDir() + "/" + name));
+        else directory.renameTo(new File(name));
         this.name = name;
     }
 
