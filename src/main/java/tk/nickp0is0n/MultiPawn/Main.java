@@ -16,7 +16,7 @@ public class Main {
     private static int count = 0;
 
     public static void main(String[] args) throws IOException {
-        System.out.println("MultiPawn Alpha v2.1.0.0507.5");
+        System.out.println("MultiPawn 2.1 RC1");
         System.out.println("by NickP0is0n (nickp0is0n.me)");
         Wini ini = null;
         int count = 0;
