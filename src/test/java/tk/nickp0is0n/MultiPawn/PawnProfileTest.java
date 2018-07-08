@@ -65,6 +65,15 @@ public class PawnProfileTest {
         newProfile.create();
     }
 
+    @Test
+    public void rename() throws IOException {
+        var newProfile = new PawnProfile("Test", count);
+        String testName = String.valueOf(Math.random()*99999);
+        newProfile.rename(testName);
+        if (newProfile.getName().equalsIgnoreCase(testName)) System.out.println("Тест rename() пройден");
+        newProfile.rename("Test");
+    }
+
     public static int setCount() throws IOException {
         var ini = new Wini(new File("mpconfig.ini"));
         var count = ini.get("Base Config", "Count", int.class);
