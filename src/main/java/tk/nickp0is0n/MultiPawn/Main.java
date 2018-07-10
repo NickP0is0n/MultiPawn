@@ -16,7 +16,7 @@ public class Main {
     private static int count = 0;
 
     public static void main(String[] args) throws IOException {
-        System.out.println("MultiPawn 2.1");
+        System.out.println("MultiPawn 2.1.1");
         System.out.println("by NickP0is0n (nickp0is0n.me)");
         Wini ini = null;
         int count = 0;
@@ -72,7 +72,8 @@ public class Main {
             }
             else if (choose == (count + 4))
             {
-                mainLabel: while (true)
+                boolean inAdvOptions = true;
+                while (inAdvOptions)
                 {
                     System.out.println("(1) Изменить папку для профилей");
                     System.out.println("(2) Вернуть стандартную папку");
@@ -101,7 +102,8 @@ public class Main {
                             System.out.println("Папка сброшена.");
                             break;
                         case 3:
-                            break mainLabel;
+                            inAdvOptions = false;
+                            break;
                     }
                 }
             }
