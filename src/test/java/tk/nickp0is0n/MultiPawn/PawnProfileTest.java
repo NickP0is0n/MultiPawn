@@ -11,17 +11,15 @@ import java.nio.file.Files;
 
 public class PawnProfileTest {
 
-    Wini ini;
-    int count;
+    private int count;
 
     @Before
     public void setUp() throws Exception {
-        ini = setWini();
         count = setCount();
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
     }
 
     @Test
@@ -35,12 +33,12 @@ public class PawnProfileTest {
     @Test
     public void getName() throws IOException {
         var newProfile = new PawnProfile(count);
-        var output = ini.get(String.valueOf(count), "Name", String.class);
+        var output = newProfile.getName();
         if(output.equalsIgnoreCase("Test")) System.out.println("Тест getName() пройден");
     }
 
     @Test
-    public void getNumber() throws IOException {
+    public void getNumber() {
         var newProfile = new PawnProfile("Test", count);
         int number = newProfile.getNumber();
         if (number == count) System.out.println("Тест getNumber() пройден");
@@ -74,14 +72,9 @@ public class PawnProfileTest {
         newProfile.rename("Test");
     }
 
-    public static int setCount() throws IOException {
+    private static int setCount() throws IOException {
+        //noinspection MismatchedQueryAndUpdateOfCollection
         var ini = new Wini(new File("mpconfig.ini"));
-        var count = ini.get("Base Config", "Count", int.class);
-        return count;
-    }
-
-    public static Wini setWini() throws IOException {
-        var ini = new Wini(new File("mpconfig.ini"));
-        return ini;
+        return ini.get("Base Config", "Count", int.class);
     }
 }

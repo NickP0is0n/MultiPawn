@@ -1,40 +1,42 @@
 package tk.nickp0is0n.MultiPawn;
 
 import org.apache.commons.io.FileUtils;
-import org.ini4j.Ini;
 import org.ini4j.Wini;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.TestOnly;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
-public class PawnProfile {
+@TestOnly
+class PawnProfile {
     private String name;
     private int number;
 
-    public PawnProfile(String name, int number)
+    PawnProfile(String name, int number)
     {
         this.name = name;
         this.number = number;
     }
 
-    public PawnProfile(int number) throws IOException {
+    PawnProfile(int number) throws IOException {
         this.number = number;
         var ini = getWini();
         this.name = ini.get(String.valueOf(number), "Name", String.class);
     }
 
-    public String getName()
+    String getName()
     {
         return name;
     }
 
-    public int getNumber()
+    int getNumber()
     {
         return number;
     }
 
-    public void create() throws IOException {
+    void create() throws IOException {
         var name = new File(this.name);
         if (Main.isDirectoryCustom()) name = new File(Main.getCustomDir() + "/" + this.name);
         Files.createDirectory(name.toPath());
@@ -44,7 +46,7 @@ public class PawnProfile {
         ini.store();
     }
 
-    public void load() throws IOException {
+    void load() throws IOException {
         FileUtils.deleteDirectory(new File("include"));
         Files.createDirectory(new File("include").toPath());
         String name = this.name;
@@ -52,7 +54,7 @@ public class PawnProfile {
         FileUtils.copyDirectory(new File(name), new File("include"));
     }
 
-    public void delete() throws IOException {
+    void delete() throws IOException {
         var ini = getWini();
         ini.remove(ini.get(String.valueOf(number)));
         String name = this.name;
@@ -68,7 +70,8 @@ public class PawnProfile {
         ini.store();
     }
 
-    public void rename(String name) throws IOException {
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    void rename(String name) throws IOException {
         var ini = getWini();
         ini.put(String.valueOf(number), "Name", name);
         ini.store();
@@ -80,8 +83,8 @@ public class PawnProfile {
         this.name = name;
     }
 
-    public static Wini getWini() throws IOException {
-        var ini = new Wini(new File("mpconfig.ini"));
-        return ini;
+    @NotNull
+    static Wini getWini() throws IOException {
+        return new Wini(new File("mpconfig.ini"));
     }
 }
