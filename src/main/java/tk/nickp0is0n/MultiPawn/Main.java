@@ -14,9 +14,12 @@ public class Main {
     private static boolean directoryCustom = false;
     private static String customDir = "";
 
+    @SuppressWarnings("InfiniteLoopStatement")
     public static void main(String[] args) throws IOException {
-        System.out.println("MultiPawn 2.1.1");
+        System.out.println("MultiPawn Alpha 2.2.0.0508.1");
         System.out.println("by NickP0is0n (nickp0is0n.me)");
+        System.out.println("Версия не предназначена для постоянного пользования!");
+        System.out.println("Использование тестовых версий программы производится исключительно на ваш страх и риск!");
         Wini ini;
         int count;
         while (true)
@@ -38,97 +41,8 @@ public class Main {
             System.out.println("(" + (count + 4) + ") Дополнительные опции");
             System.out.println("(" + (count + 5) + ") Выйти");
             int choose = in.nextInt();
-            if (choose == (count + 1))
-            {
-                if (!newProfile(count))
-                {
-                    System.out.println("Ошибка при создании нового профиля!");
-                    System.out.println("Для выхода из программы нажмите любую клавишу.");
-                    //noinspection ResultOfMethodCallIgnored
-                    System.in.read();
-                    System.exit(4);
-                }
-
-            }
-            else if (choose == (count + 5))
-            {
-                System.exit(0);
-            }
-            else if (choose == (count + 2))
-            {
-                System.out.println("\nВведите номер профиля, который вы хотите удалить:");
-                int number = in.nextInt();
-                var newProfile = new PawnProfile(number);
-                newProfile.delete();
-            }
-            else if (choose == (count + 3))
-            {
-                System.out.println("\nВведите номер профиля, который вы хотите переименовать:");
-                int number = in.nextInt();
-                System.out.println("Введите новое имя профиля:");
-                String newName = inStr.nextLine();
-                var workProfile = new PawnProfile(number);
-                workProfile.rename(newName);
-            }
-            else if (choose == (count + 4))
-            {
-                boolean inAdvOptions = true;
-                while (inAdvOptions)
-                {
-                    System.out.println("(1) Изменить папку для профилей");
-                    System.out.println("(2) Вернуть стандартную папку");
-                    System.out.println("(3) Вернутся в главное меню");
-                    int advChoose = in.nextInt();
-                    switch (advChoose)
-                    {
-                        default:
-                            System.out.println("Неправильный ввод\n");
-                            break;
-                        case 1:
-                            System.out.println("Введите путь к папке, где будут хранится профили:");
-                            customDir = inStr.nextLine();
-                            directoryCustom = true;
-                            System.out.println("Кастомная папка установлена! Не забудьте перенести в неё существующие профили!\n");
-                            ini.put("Base Config", "IsDirCustom", true);
-                            ini.put("Base Config", "Custom Dir", customDir);
-                            ini.store();
-                            break;
-                        case 2:
-                            directoryCustom = false;
-                            customDir = "";
-                            ini.put("Base Config", "IsDirCustom", false);
-                            ini.put("Base Config", "Custom Dir", customDir);
-                            ini.store();
-                            System.out.println("Папка сброшена.");
-                            break;
-                        case 3:
-                            inAdvOptions = false;
-                            break;
-                    }
-                }
-            }
-            else
-            {
-                PawnProfile newProfile = new PawnProfile(choose);
-                newProfile.load();
-                System.out.println("Профиль " + newProfile.getName() + " успешно загружен!");
-                System.out.println("Нажмите любую клавишу для продолжения...");
-                //noinspection ResultOfMethodCallIgnored
-                System.in.read();
-            }
+            mainMenuExec(count, choose);
         }
-    }
-
-    private static boolean newProfile(int count) throws IOException // возвращает false (ошибка) либо true (успех)
-    {
-        System.out.println("\nВведите название нового профиля:");
-        var newProfile = new PawnProfile(inStr.nextLine(), count+1);
-        newProfile.create();
-        System.out.println("Профиль успешно создан!");
-        System.out.println("Теперь поместите в созданную папку все include");
-        //noinspection ResultOfMethodCallIgnored
-        System.in.read();
-        return true;
     }
 
     @Contract(pure = true)
@@ -139,5 +53,93 @@ public class Main {
     @Contract(pure = true)
     static String getCustomDir() {
         return customDir;
+    }
+
+    private static void mainMenuExec(int count, int choose) throws IOException
+    {
+        var ini = PawnProfile.getWini();
+        if (choose == (count + 1)) newProfile(count);
+        else if (choose == (count + 5)) System.exit(0);
+        else if (choose == (count + 2)) deleteProfileShow();
+        else if (choose == (count + 3)) renameProfileShow();
+        else if (choose == (count + 4)) showAdditionalSettings(ini);
+        else loadProfileShow(choose);
+    }
+
+    private static void showAdditionalSettings(Wini ini) throws IOException {
+        boolean inAdvOptions = true;
+        while (inAdvOptions)
+        {
+            System.out.println("(1) Изменить папку для профилей");
+            System.out.println("(2) Вернуть стандартную папку");
+            System.out.println("(3) Импортировать профиль");
+            System.out.println("(4) Экспортировать профиль");
+            System.out.println("(3) Вернутся в главное меню");
+            int advChoose = in.nextInt();
+            switch (advChoose)
+            {
+                default:
+                    System.out.println("Неправильный ввод\n");
+                    break;
+                case 1:
+                    System.out.println("Введите путь к папке, где будут хранится профили:");
+                    customDir = inStr.nextLine();
+                    directoryCustom = true;
+                    System.out.println("Кастомная папка установлена! Не забудьте перенести в неё существующие профили!\n");
+                    ini.put("Base Config", "IsDirCustom", true);
+                    ini.put("Base Config", "Custom Dir", customDir);
+                    ini.store();
+                    break;
+                case 2:
+                    directoryCustom = false;
+                    customDir = "";
+                    ini.put("Base Config", "IsDirCustom", false);
+                    ini.put("Base Config", "Custom Dir", customDir);
+                    ini.store();
+                    System.out.println("Папка сброшена.");
+                    break;
+                case 3:
+                    inAdvOptions = false;
+                    break;
+            }
+        }
+    }
+
+    //Методы дальше отвечают за обработку выбора в главном меню программы
+
+    private static void newProfile(int count) throws IOException // возвращает false (ошибка) либо true (успех)
+    {
+        System.out.println("\nВведите название нового профиля:");
+        var newProfile = new PawnProfile(inStr.nextLine(), count+1);
+        newProfile.create();
+        System.out.println("Профиль успешно создан!");
+        System.out.println("Теперь поместите в созданную папку все include");
+        //noinspection ResultOfMethodCallIgnored
+        System.in.read();
+    }
+
+    private static void deleteProfileShow() throws IOException {
+        System.out.println("\nВведите номер профиля, который вы хотите удалить:");
+        int number = in.nextInt();
+        var newProfile = new PawnProfile(number);
+        newProfile.delete();
+    }
+
+    private static void renameProfileShow() throws IOException {
+        System.out.println("\nВведите номер профиля, который вы хотите переименовать:");
+        int number = in.nextInt();
+        System.out.println("Введите новое имя профиля:");
+        String newName = inStr.nextLine();
+        var workProfile = new PawnProfile(number);
+        workProfile.rename(newName);
+    }
+
+    private static void loadProfileShow(int choose) throws IOException {
+        PawnProfile newProfile = new PawnProfile(choose);
+        newProfile.load();
+        System.out.println("Профиль " + newProfile.getName() + " успешно загружен!");
+        System.out.println("Нажмите любую клавишу для продолжения...");
+        //noinspection ResultOfMethodCallIgnored
+        System.in.read();
     }
 }
