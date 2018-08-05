@@ -1,6 +1,7 @@
 package tk.nickp0is0n.MultiPawn;
 
 import org.ini4j.Wini;
+import org.jetbrains.annotations.Contract;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -13,13 +14,11 @@ public class Main {
     private static boolean directoryCustom = false;
     private static String customDir = "";
 
-    private static int count = 0;
-
     public static void main(String[] args) throws IOException {
-        System.out.println("MultiPawn Alpha v2.1.0.0507.5");
+        System.out.println("MultiPawn 2.1.1");
         System.out.println("by NickP0is0n (nickp0is0n.me)");
-        Wini ini = null;
-        int count = 0;
+        Wini ini;
+        int count;
         while (true)
         {
             ini = PawnProfile.getWini();
@@ -45,6 +44,7 @@ public class Main {
                 {
                     System.out.println("Ошибка при создании нового профиля!");
                     System.out.println("Для выхода из программы нажмите любую клавишу.");
+                    //noinspection ResultOfMethodCallIgnored
                     System.in.read();
                     System.exit(4);
                 }
@@ -72,7 +72,8 @@ public class Main {
             }
             else if (choose == (count + 4))
             {
-                mainLabel: while (true)
+                boolean inAdvOptions = true;
+                while (inAdvOptions)
                 {
                     System.out.println("(1) Изменить папку для профилей");
                     System.out.println("(2) Вернуть стандартную папку");
@@ -101,7 +102,8 @@ public class Main {
                             System.out.println("Папка сброшена.");
                             break;
                         case 3:
-                            break mainLabel;
+                            inAdvOptions = false;
+                            break;
                     }
                 }
             }
@@ -111,6 +113,7 @@ public class Main {
                 newProfile.load();
                 System.out.println("Профиль " + newProfile.getName() + " успешно загружен!");
                 System.out.println("Нажмите любую клавишу для продолжения...");
+                //noinspection ResultOfMethodCallIgnored
                 System.in.read();
             }
         }
@@ -123,15 +126,18 @@ public class Main {
         newProfile.create();
         System.out.println("Профиль успешно создан!");
         System.out.println("Теперь поместите в созданную папку все include");
+        //noinspection ResultOfMethodCallIgnored
         System.in.read();
         return true;
     }
 
-    public static boolean isDirectoryCustom() {
+    @Contract(pure = true)
+    static boolean isDirectoryCustom() {
         return directoryCustom;
     }
 
-    public static String getCustomDir() {
+    @Contract(pure = true)
+    static String getCustomDir() {
         return customDir;
     }
 }
