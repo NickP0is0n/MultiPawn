@@ -14,7 +14,7 @@ public class OneFileProfileTest {
 
     @Test
     public void createArchive() throws IOException, ZipException {
-        var oneProfile = new OneFileProfile("Test");
+        var oneProfile = new OneFileProfile("Test1");
         Files.createDirectory(new File("Test1").toPath());
         Files.createFile(new File("Test1/testfile.pwn").toPath());
         oneProfile.createArchive();
