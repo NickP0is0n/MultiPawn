@@ -5,6 +5,8 @@ import net.lingala.zip4j.exception.ZipException;
 import net.lingala.zip4j.model.*;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 
 public class OneFileProfile implements Archivable {
 
@@ -24,12 +26,13 @@ public class OneFileProfile implements Archivable {
     }
 
     @Override
-    public void removeArchive() {
-
+    public void removeArchive() throws IOException {
+        Files.delete(new File(archiveName + ".mp").toPath());
     }
 
     @Override
-    public void unZip() {
-
+    public void unZip() throws ZipException {
+        var zipFile = new ZipFile(new File(archiveName + ".mp"));
+        zipFile.extractAll(archiveName);
     }
 }

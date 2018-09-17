@@ -26,10 +26,12 @@ public class OneFileProfileTest {
     }
 
     @Test
-    public void removeArchive() {
+    public void removeArchive()
+    {
     }
 
     @Test
     public void unZip() {
+
     }
 }

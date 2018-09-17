@@ -1,5 +1,6 @@
 package tk.nickp0is0n.MultiPawn;
 
+import net.lingala.zip4j.exception.ZipException;
 import org.ini4j.Wini;
 import org.jetbrains.annotations.Contract;
 
@@ -16,7 +17,7 @@ public class Main {
 
     @SuppressWarnings("InfiniteLoopStatement")
     public static void main(String[] args) throws IOException {
-        System.out.println("MultiPawn Alpha 2.2.0.0409.1");
+        System.out.println("MultiPawn Alpha 2.2.0.1709.1");
         System.out.println("by NickP0is0n (nickp0is0n.me)");
         System.out.println("Версия не предназначена для постоянного пользования!");
         System.out.println("Использование тестовых версий программы производится исключительно на ваш страх и риск!");
@@ -55,11 +56,10 @@ public class Main {
         return customDir;
     }
 
-    private static void mainMenuExec(int count, int choose) throws IOException
-    {
+    private static void mainMenuExec(int count, int choose) throws IOException {
         var ini = PawnProfile.getWini();
         if (choose == (count + 1)) newProfile(count);
-        else if (choose == (count + 5)) System.exit(0);
+        else if (choose >= (count + 5)) System.exit(0);
         else if (choose == (count + 2)) deleteProfileShow();
         else if (choose == (count + 3)) renameProfileShow();
         else if (choose == (count + 4)) showAdditionalSettings(ini);
