@@ -8,8 +8,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
-import static org.junit.Assert.*;
-
 public class OneFileProfileTest {
 
     @Test
@@ -37,6 +35,16 @@ public class OneFileProfileTest {
     }
 
     @Test
-    public void unZip() {
+    public void unZip() throws IOException, ZipException {
+        var oneProfile = new OneFileProfile("Test1");
+        Files.createDirectory(new File("Test1").toPath());
+        Files.createFile(new File("Test1/testfile.pwn").toPath());
+        oneProfile.createArchive();
+        FileUtils.deleteDirectory(new File("Test1"));
+        oneProfile.unZip();
+        if(new File("Test1").exists()) System.out.println("Тест unZip() пройден [1/2]");
+        if(new File("Test1/testfile.pwn").exists()) System.out.println("Тест unZip() пройден [2/2]");
+        FileUtils.deleteDirectory(new File("Test1"));
+        Files.delete(new File("Test1.mp").toPath());
     }
 }
