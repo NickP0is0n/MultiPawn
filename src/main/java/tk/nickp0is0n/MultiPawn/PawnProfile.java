@@ -3,13 +3,11 @@ package tk.nickp0is0n.MultiPawn;
 import org.apache.commons.io.FileUtils;
 import org.ini4j.Wini;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.TestOnly;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
-@TestOnly
 class PawnProfile {
     private String name;
     private int number;

@@ -26,12 +26,17 @@ public class OneFileProfileTest {
     }
 
     @Test
-    public void removeArchive()
-    {
+    public void removeArchive() throws IOException, ZipException {
+        var oneProfile = new OneFileProfile("Test1");
+        Files.createDirectory(new File("Test1").toPath());
+        Files.createFile(new File("Test1/testfile.pwn").toPath());
+        oneProfile.createArchive();
+        oneProfile.removeArchive();
+        if(!new File("Test1.mp").exists()) System.out.println("Тест removeArchive() пройден");
+        FileUtils.deleteDirectory(new File("Test1"));
     }
 
     @Test
     public void unZip() {
-
     }
 }
