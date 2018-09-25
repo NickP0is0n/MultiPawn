@@ -17,7 +17,7 @@ public class Main {
 
     @SuppressWarnings("InfiniteLoopStatement")
     public static void main(String[] args) throws IOException {
-        System.out.println("MultiPawn Alpha 2.2.0.1709.3");
+        System.out.println("MultiPawn Alpha 2.2.0.2509.1 with Java 11 support");
         System.out.println("by NickP0is0n (nickp0is0n.me)");
         System.out.println("Версия не предназначена для постоянного пользования!");
         System.out.println("Использование тестовых версий программы производится исключительно на ваш страх и риск!");
@@ -66,6 +66,7 @@ public class Main {
         else loadProfileShow(choose);
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     private static void showAdditionalSettings(Wini ini) throws IOException {
         boolean inAdvOptions = true;
         while (inAdvOptions)
@@ -74,7 +75,7 @@ public class Main {
             System.out.println("(2) Вернуть стандартную папку");
             System.out.println("(3) Импортировать профиль");
             System.out.println("(4) Экспортировать профиль");
-            System.out.println("(3) Вернутся в главное меню");
+            System.out.println("(5) Вернутся в главное меню");
             int advChoose = in.nextInt();
             switch (advChoose)
             {
@@ -99,6 +100,19 @@ public class Main {
                     System.out.println("Папка сброшена.");
                     break;
                 case 3:
+                    System.out.println("Введите название файла профиля (с учетом реестра и с расширением):");
+                    var profileName = inStr.nextLine();
+                    var profileFile = new OneFileProfile(profileName);
+                    try {
+                        profileFile.unZip();
+                    } catch (ZipException e) {
+                        System.out.println("Архив отсутствует или произошла ошибка при распаковке.");
+                        pressAny();
+                        break;
+                    }
+                    System.out.println("Профиль успешно импортирован!");
+                    break;
+                case 5:
                     inAdvOptions = false;
                     break;
             }
@@ -115,7 +129,7 @@ public class Main {
         System.out.println("Профиль успешно создан!");
         System.out.println("Теперь поместите в созданную папку все include");
         //noinspection ResultOfMethodCallIgnored
-        System.in.read();
+        pressAny();
     }
 
     private static void deleteProfileShow() throws IOException {
@@ -140,6 +154,12 @@ public class Main {
         System.out.println("Профиль " + newProfile.getName() + " успешно загружен!");
         System.out.println("Нажмите любую клавишу для продолжения...");
         //noinspection ResultOfMethodCallIgnored
+        pressAny();
+    }
+
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    private static void pressAny() throws IOException {
+        System.out.println("Нажмите Enter для продолжения");
         System.in.read();
     }
 }
