@@ -81,6 +81,13 @@ class PawnProfile {
         this.name = name;
     }
 
+    static void convertIntoProfile(String name, int number) throws IOException {
+        var ini = PawnProfile.getWini();
+        ini.put(String.valueOf(number),"Name", name);
+        ini.put("Base Config", "Count", number);
+        ini.store();
+    }
+
     @NotNull
     static Wini getWini() throws IOException {
         return new Wini(new File("mpconfig.ini"));

@@ -64,12 +64,12 @@ public class Main {
         else if (choose >= (count + 5)) System.exit(0);
         else if (choose == (count + 2)) deleteProfileShow();
         else if (choose == (count + 3)) renameProfileShow();
-        else if (choose == (count + 4)) showAdditionalSettings(ini);
+        else if (choose == (count + 4)) showAdditionalSettings(ini, count);
         else loadProfileShow(choose);
     }
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
-    private static void showAdditionalSettings(Wini ini) throws IOException {
+    private static void showAdditionalSettings(Wini ini, int count) throws IOException {
         boolean inAdvOptions = true;
         while (inAdvOptions)
         {
@@ -113,6 +113,7 @@ public class Main {
                         pressAny();
                         break;
                     }
+                    PawnProfile.convertIntoProfile(profileName, count + 1);
                     System.out.println("Профиль успешно импортирован!");
                     break;
                 case 4:
