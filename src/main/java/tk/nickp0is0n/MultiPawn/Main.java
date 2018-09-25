@@ -115,6 +115,20 @@ public class Main {
                     }
                     System.out.println("Профиль успешно импортирован!");
                     break;
+                case 4:
+                    System.out.println("Введите номер профиля, который вы хотите экспортировать:");
+                    var number = in.nextInt();
+                    var workProfile = new PawnProfile(number);
+                    var newProfileFile = new OneFileProfile(workProfile.getName());
+                    try {
+                        newProfileFile.createArchive();
+                    } catch (ZipException e) {
+                        System.out.println("Произошла ошибка при создании файла. Возможно, он уже существует.");
+                        pressAny();
+                        break;
+                    }
+                    System.out.println("Профиль успешно экспортирован и находится в папке с программой.");
+                    break;
                 case 5:
                     inAdvOptions = false;
                     break;
