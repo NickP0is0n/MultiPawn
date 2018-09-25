@@ -19,7 +19,7 @@ public class Main {
 
     @SuppressWarnings("InfiniteLoopStatement")
     public static void main(String[] args) throws IOException {
-        System.out.println("MultiPawn Alpha 2.2.0.2509.1 with Java 11 support");
+        System.out.println("MultiPawn Alpha 2.2.0.2509.1");
         System.out.println("by NickP0is0n (nickp0is0n.me)");
         System.out.println("Версия не предназначена для постоянного пользования!");
         System.out.println("Использование тестовых версий программы производится исключительно на ваш страх и риск!");
@@ -115,6 +115,7 @@ public class Main {
                     }
                     PawnProfile.convertIntoProfile(profileName, count + 1);
                     System.out.println("Профиль успешно импортирован!");
+                    System.out.println(" ");
                     break;
                 case 4:
                     System.out.println("Введите номер профиля, который вы хотите экспортировать:");
@@ -129,6 +130,7 @@ public class Main {
                         break;
                     }
                     System.out.println("Профиль успешно экспортирован и находится в папке с программой.");
+                    System.out.println(" ");
                     break;
                 case 5:
                     inAdvOptions = false;
