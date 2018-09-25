@@ -1,9 +1,11 @@
 package tk.nickp0is0n.MultiPawn;
 
 import net.lingala.zip4j.exception.ZipException;
+import org.apache.commons.io.FileUtils;
 import org.ini4j.Wini;
 import org.jetbrains.annotations.Contract;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -100,13 +102,14 @@ public class Main {
                     System.out.println("Папка сброшена.");
                     break;
                 case 3:
-                    System.out.println("Введите название файла профиля (с учетом реестра и с расширением):");
+                    System.out.println("Введите название файла профиля (с учетом реестра и без расширения):");
                     var profileName = inStr.nextLine();
                     var profileFile = new OneFileProfile(profileName);
                     try {
                         profileFile.unZip();
                     } catch (ZipException e) {
                         System.out.println("Архив отсутствует или произошла ошибка при распаковке.");
+                        FileUtils.deleteDirectory(new File(profileName));
                         pressAny();
                         break;
                     }
