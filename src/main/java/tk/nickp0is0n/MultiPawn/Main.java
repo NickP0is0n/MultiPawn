@@ -19,7 +19,7 @@ public class Main {
 
     @SuppressWarnings("InfiniteLoopStatement")
     public static void main(String[] args) throws IOException {
-        System.out.println("MultiPawn Alpha 2.2.0.2509.1");
+        System.out.println("MultiPawn Alpha 2.2.0.0110.1");
         System.out.println("by NickP0is0n (nickp0is0n.me)");
         System.out.println("Версия не предназначена для постоянного пользования!");
         System.out.println("Использование тестовых версий программы производится исключительно на ваш страх и риск!");
@@ -31,12 +31,14 @@ public class Main {
             count = ini.get("Base Config", "Count", int.class);
             directoryCustom = ini.get("Base Config", "IsDirCustom", boolean.class);
             customDir = ini.get("Base Config", "Custom Dir", String.class);
+            var selectedProfile = ini.get("Base Config", "Selected", int.class);
             System.out.println(" ");
             System.out.println("Выберите профиль, на который хотите переключится:");
             for (int i = 1; i <= count; i++)
             {
-                String section = ini.get(String.valueOf(i), "Name", String.class);
-                System.out.println("(" + i + ") " + section);
+                var section = ini.get(String.valueOf(i), "Name", String.class);
+                if (selectedProfile == i) System.out.println("(" + i + ") " + section + "(текущий)");
+                else System.out.println("(" + i + ") " + section);
             }
             System.out.println("(" + (count + 1) + ") Добавить новый профиль");
             System.out.println("(" + (count + 2) + ") Удалить профиль");
@@ -157,6 +159,9 @@ public class Main {
         int number = in.nextInt();
         var newProfile = new PawnProfile(number);
         newProfile.delete();
+        var ini = PawnProfile.getWini();
+        if(ini.get("Base Config", "Selected", int.class) == number) ini.put("Base Config", "Selected", 0);
+        ini.store();
     }
 
     private static void renameProfileShow() throws IOException {
@@ -171,6 +176,9 @@ public class Main {
     private static void loadProfileShow(int choose) throws IOException {
         PawnProfile newProfile = new PawnProfile(choose);
         newProfile.load();
+        var ini = PawnProfile.getWini();
+        ini.put("Base Config", "Selected", choose);
+        ini.store();
         System.out.println("Профиль " + newProfile.getName() + " успешно загружен!");
         System.out.println("Нажмите любую клавишу для продолжения...");
         //noinspection ResultOfMethodCallIgnored
