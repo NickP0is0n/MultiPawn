@@ -19,10 +19,8 @@ public class Main {
 
     @SuppressWarnings("InfiniteLoopStatement")
     public static void main(String[] args) throws IOException {
-        System.out.println("MultiPawn Alpha 2.2.0.0110.2");
+        System.out.println("MultiPawn 2.2 RC1");
         System.out.println("by NickP0is0n (nickp0is0n.me)");
-        System.out.println("Версия не предназначена для постоянного пользования!");
-        System.out.println("Использование тестовых версий программы производится исключительно на ваш страх и риск!");
         Wini ini;
         int count;
         while (true)

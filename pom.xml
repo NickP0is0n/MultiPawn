@@ -6,7 +6,7 @@
 
     <groupId>groupId</groupId>
     <artifactId>MultiPawn</artifactId>
-    <version>2.2.0.0110.1-ALPHA</version>
+    <version>2.2-RC1</version>
 
     <properties>
         <maven.compiler.source>10</maven.compiler.source>
