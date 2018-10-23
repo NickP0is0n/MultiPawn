@@ -3,13 +3,11 @@ package tk.nickp0is0n.MultiPawn;
 import org.apache.commons.io.FileUtils;
 import org.ini4j.Wini;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.TestOnly;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
-@TestOnly
 class PawnProfile {
     private String name;
     private int number;
@@ -81,6 +79,13 @@ class PawnProfile {
         if (Main.isDirectoryCustom()) directory.renameTo(new File(Main.getCustomDir() + "/" + name));
         else directory.renameTo(new File(name));
         this.name = name;
+    }
+
+    static void convertIntoProfile(String name, int number) throws IOException {
+        var ini = PawnProfile.getWini();
+        ini.put(String.valueOf(number),"Name", name);
+        ini.put("Base Config", "Count", number);
+        ini.store();
     }
 
     @NotNull

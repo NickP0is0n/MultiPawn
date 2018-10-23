@@ -9,8 +9,5 @@
         <module name="MultiPawn" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="MultiPawn" target="10" />
-    </bytecodeTargetLevel>
   </component>
 </project>

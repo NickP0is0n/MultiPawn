@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="JavadocGenerationManager">
-    <option name="OUTPUT_DIRECTORY" value="E:/Javadoc/MultiPawn" />
-    <option name="OPTION_DOCUMENT_TAG_USE" value="true" />
-    <option name="OPTION_DOCUMENT_TAG_AUTHOR" value="true" />
-    <option name="OPTION_DOCUMENT_TAG_VERSION" value="true" />
-    <option name="HEAP_SIZE" value="1024" />
-    <option name="LOCALE" value="ru_RU" />
-  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
@@ -15,10 +8,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectKey">
-    <option name="state" value="project://e2804f05-5315-4fc6-a121-c522a6c26470" />
-  </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_10" default="true" project-jdk-name="10" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_10" default="false" project-jdk-name="OpenJDK 11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>
