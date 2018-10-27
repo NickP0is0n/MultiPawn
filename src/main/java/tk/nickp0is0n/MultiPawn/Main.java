@@ -19,7 +19,7 @@ public class Main {
 
     @SuppressWarnings("InfiniteLoopStatement")
     public static void main(String[] args) throws IOException {
-        System.out.println("MultiPawn 2.2 RC1");
+        System.out.println("MultiPawn 2.2");
         System.out.println("by NickP0is0n (nickp0is0n.me)");
         Wini ini;
         int count;
