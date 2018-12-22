@@ -19,7 +19,7 @@ public class Main {
 
     @SuppressWarnings("InfiniteLoopStatement")
     public static void main(String[] args) throws IOException {
-        System.out.println("MultiPawn Alpha 2.2.0.0110.2");
+        System.out.println("MultiPawn Alpha 2.3.0.2212.1");
         System.out.println("by NickP0is0n (nickp0is0n.me)");
         System.out.println("Версия не предназначена для постоянного пользования!");
         System.out.println("Использование тестовых версий программы производится исключительно на ваш страх и риск!");
@@ -79,7 +79,8 @@ public class Main {
             System.out.println("(2) Вернуть стандартную папку");
             System.out.println("(3) Импортировать профиль");
             System.out.println("(4) Экспортировать профиль");
-            System.out.println("(5) Вернутся в главное меню");
+            System.out.println("(5) Экспорт в кастомную папку");
+            System.out.println("(6) Вернутся в главное меню");
             int advChoose = in.nextInt();
             switch (advChoose)
             {
@@ -135,6 +136,9 @@ public class Main {
                     System.out.println(" ");
                     break;
                 case 5:
+                    System.out.println("В разработке!");
+                    break;
+                case 6:
                     inAdvOptions = false;
                     break;
             }
