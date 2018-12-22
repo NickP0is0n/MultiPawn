@@ -78,9 +78,10 @@ public class Main {
             System.out.println("(1) Изменить папку для профилей");
             System.out.println("(2) Вернуть стандартную папку");
             System.out.println("(3) Импортировать профиль");
-            System.out.println("(4) Экспортировать профиль");
-            System.out.println("(5) Экспорт в кастомную папку");
-            System.out.println("(6) Вернутся в главное меню");
+            System.out.println("(4) Импорт из кастомной папки");
+            System.out.println("(5) Экспортировать профиль");
+            System.out.println("(6) Экспорт в кастомную папку");
+            System.out.println("(7) Вернутся в главное меню");
             int advChoose = in.nextInt();
             switch (advChoose)
             {
@@ -121,6 +122,9 @@ public class Main {
                     System.out.println(" ");
                     break;
                 case 4:
+                    System.out.println("В разработке!");
+                    break;
+                case 5:
                     System.out.println("Введите номер профиля, который вы хотите экспортировать:");
                     var number = in.nextInt();
                     var workProfile = new PawnProfile(number);
@@ -135,10 +139,10 @@ public class Main {
                     System.out.println("Профиль успешно экспортирован и находится в папке с программой.");
                     System.out.println(" ");
                     break;
-                case 5:
+                case 6:
                     System.out.println("В разработке!");
                     break;
-                case 6:
+                case 7:
                     inAdvOptions = false;
                     break;
             }
