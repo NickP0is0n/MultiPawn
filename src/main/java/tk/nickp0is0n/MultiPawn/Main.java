@@ -70,7 +70,6 @@ public class Main {
         else loadProfileShow(choose);
     }
 
-    @SuppressWarnings("ResultOfMethodCallIgnored")
     private static void showAdditionalSettings(Wini ini, int count) throws IOException {
         boolean inAdvOptions = true;
         while (inAdvOptions)
@@ -158,7 +157,6 @@ public class Main {
         newProfile.create();
         System.out.println("Профиль успешно создан!");
         System.out.println("Теперь поместите в созданную папку все include");
-        //noinspection ResultOfMethodCallIgnored
         pressAny();
     }
 
@@ -189,7 +187,6 @@ public class Main {
         ini.store();
         System.out.println("Профиль " + newProfile.getName() + " успешно загружен!");
         System.out.println("Нажмите любую клавишу для продолжения...");
-        //noinspection ResultOfMethodCallIgnored
         pressAny();
     }
 
